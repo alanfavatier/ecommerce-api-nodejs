@@ -11,7 +11,6 @@ const {
 const app = express();
 
 app.use(express.json());
-
 app.use(cors());
 
 routerApi(app);
@@ -26,7 +25,7 @@ module.exports = app;
 
 // Para ejecutar localmente con Node
 if (require.main === module) {
-  const port = 3000;
+  const port = process.env.PORT || 3000;
 
   app.listen(port, () => {
     console.log(`Servidor ejecutándose en http://localhost:${port}`);
