@@ -1,32 +1,27 @@
 const express = require("express");
-const cors = require("cors");
-const routerApi = require("./routes/index");
-
-const {
-  logErrors,
-  boomErrorHandler,
-  errorHandler,
-} = require("./middlewares/error.handler");
-
 const app = express();
 
-app.use(express.json());
-app.use(cors());
+app.get("/", (req, res) => {
+  res.json({
+    ok: true,
+    message: "API funcionando en Vercel",
+  });
+});
 
-routerApi(app);
-
-// Middlewares de manejo de errores
-app.use(logErrors);
-app.use(boomErrorHandler);
-app.use(errorHandler);
+app.get("/api/v1/products", (req, res) => {
+  res.json([
+    {
+      id: "1",
+      name: "Producto de prueba",
+      price: 100,
+    },
+  ]);
+});
 
 module.exports = app;
 
-// Ejecutar localmente
 if (require.main === module) {
-  const port = process.env.PORT || 3000;
-
-  app.listen(port, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${port}`);
+  app.listen(3000, () => {
+    console.log("Servidor ejecutándose en http://localhost:3000");
   });
 }
