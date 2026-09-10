@@ -20,10 +20,9 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-// Exportamos la aplicación para Vercel
 module.exports = app;
 
-// Para ejecutar localmente con Node
+// Ejecutar localmente
 if (require.main === module) {
   const port = process.env.PORT || 3000;
 
